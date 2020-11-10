@@ -1,9 +1,8 @@
-// reduce
-// Получи общую сумму баланса (сумму значений свойства balance) всех пользователей.
+// sort и map
+// Получи массив имен (поле name) людей, отсортированных в зависимости от количества их друзей (поле friends)
 
-// Используй деструктурирующее присваивание для параметра функции {balance} без пробелов и переносов на новую строку
+// Избегаем мутации исходного массива: т.к. метод sort изменяет (мутирует) исходный массив, то следует сделать копию массива и сортировать уже копию, а не исходный массив.
 
-// Используй только перебирающие методы массива которые не изменяют (не мутируют) исходный массив. Т.е. нельзя использовать for, splice, push и т.п. мутирующие методы.
 
 const users =  [
   {
@@ -93,8 +92,10 @@ const users =  [
 ];
 
 // Write code under this line
-const calculateTotalBalance = array =>
-  array.reduce((array, { balance }) => array + balance, 0);
+const getNamesSortedByFriendsCount = array =>
+  (array = [...array]
+    .sort((a, b) => a.friends.length - b.friends.length)
+    .map(({ name }) => name));
 
-// console.log(calculateTotalBalance(users));
-// 20916
+// console.log(getNamesSortedByFriendsCount(users));
+// [ 'Moore Hensley', 'Sharlene Bush', 'Elma Head', 'Carey Barr', 'Blackburn Dotson', 'Sheree Anthony', 'Ross Vazquez' ]
